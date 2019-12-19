@@ -1,0 +1,29 @@
+{
+  "name": "unx-utils",
+  "version": "1.0.0",
+  "description": "javascript base utils",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"  
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinux7/unx-utils.git"
+  },
+  "keywords": [
+    "javascript",
+    "utils"
+  ],
+  "author": "jinux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jinux7/unx-utils/issues"
+  },
+  "homepage": "https://github.com/jinux7/unx-utils#readme",
+  "dependencies": {
+    "rollup": "^1.27.9",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
+}
