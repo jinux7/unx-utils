@@ -89,18 +89,78 @@
       removeCookie
     };
 
+    /**
+     * @desc   url参数转对象
+     * @param  {String} url  default: window.location.href
+     * @return {Object} 
+     */
+    function urlQuery2Object(url) {
+      url = !url ? window.location.href : url;
+      if(url.indexOf('?') === -1) {
+          return {};
+      }
+      var search = url[0] === '?' ? url.substr(1) : url.substring(url.lastIndexOf('?') + 1);
+      if (search === '') {
+          return {};
+      }
+      search = search.split('&');
+      var query = {};
+      for (var i = 0; i < search.length; i++) {
+          var pair = search[i].split('=');
+          query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+      }
+      return query;
+    }
+
+    /**
+     * 
+     * @desc   对象序列化
+     * @param  {Object} obj 
+     * @return {String}
+     */
+    function object2UrlQuery(obj) {
+        if (!obj) return '';
+        var pairs = [];
+
+        for (var key in obj) {
+            var value = obj[key];
+
+            if (value instanceof Array) {
+                for (var i = 0; i < value.length; ++i) {
+                    pairs.push(encodeURIComponent(key + '[' + i + ']') + '=' + encodeURIComponent(value[i]));
+                }
+                continue;
+            }
+
+            pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+        }
+
+        return pairs.join('&');
+    }
+
+    var url = {
+      urlQuery2Object,
+      object2UrlQuery
+    };
+
     // array
     let arrayEqual$1 = array.arrayEqual;
     // cookie
     let setCookie$1 = cookie.setCookie;
     let getCookie$1 = cookie.getCookie;
     let removeCookie$1 = cookie.removeCookie;
+    // url
+    let urlQuery2Object$1 = url.urlQuery2Object;
+    let object2UrlQuery$1 = url.object2UrlQuery;
+
 
     let utils = {
     	arrayEqual: arrayEqual$1,
     	setCookie: setCookie$1,
     	getCookie: getCookie$1,
-    	removeCookie: removeCookie$1
+    	removeCookie: removeCookie$1,
+    	urlQuery2Object: urlQuery2Object$1,
+    	object2UrlQuery: object2UrlQuery$1
     };
 
     return utils;
