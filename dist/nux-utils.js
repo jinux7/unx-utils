@@ -22,8 +22,29 @@
 
     var arrayEqual_1 = arrayEqual;
 
+    /**
+     * @desc 数组的遍历
+     * @param {Array} obj 
+     * @param {Function} function(item, index) {} 
+     * @return {void}
+     */
+    function arrayEach (obj, iterate, context) {
+        if (obj) {
+          if (obj.forEach) {
+            obj.forEach(iterate, context);
+          } else {
+            for (var index = 0, len = obj.length; index < len; index++) {
+              iterate.call(context, obj[index], index, obj);
+            }
+          }
+        }
+      }
+      
+      var arrayEach_1 = arrayEach;
+
     var array = {
-    	arrayEqual: arrayEqual_1
+    	arrayEqual: arrayEqual_1,
+    	arrayEach: arrayEach_1
     };
 
     /**
@@ -177,8 +198,81 @@
       toType: toType_1
     };
 
+    /**
+     * @desc 获取浏览器的内核属性等信息
+     * @return {Object} 例：{"isNode":false,"isMobile":true,"isPC":false,"isDoc":true,"-webkit":true,"-khtml":false,"-moz":false,"-ms":false,"-o":false,"edge":false,"firefox":false,"msie":false,"safari":true,"isLocalStorage":true,"isSessionStorage":true}
+     */
+    var staticStrUndefined = 'undefined';
+    var staticDocument = typeof document === staticStrUndefined ? 0 : document;
+    var staticWindow = typeof window === staticStrUndefined ? 0 : window;
+
+    var assign = Object.assign;
+
+
+    /* eslint-disable valid-typeof */
+    function isBrowseStorage (storage) {
+      try {
+        var testKey = '__xe_t';
+        storage.setItem(testKey, 1);
+        storage.removeItem(testKey);
+        return true
+      } catch (e) {
+        return false
+      }
+    }
+
+    function isBrowseType (type) {
+      return navigator.userAgent.indexOf(type) > -1
+    }
+
+    /**
+      * 获取浏览器内核
+      * @return Object
+      */
+    function browser () {
+      var $body, isChrome, isEdge;
+      var isMobile = false;
+      var result = {
+        isNode: false,
+        isMobile: isMobile,
+        isPC: false,
+        isDoc: !!staticDocument
+      };
+      if (!staticWindow && typeof process !== staticStrUndefined) {
+        result.isNode = true;
+      } else {
+        isEdge = isBrowseType('Edge');
+        isChrome = isBrowseType('Chrome');
+        isMobile = /(Android|webOS|iPhone|iPad|iPod|SymbianOS|BlackBerry|Windows Phone)/.test(navigator.userAgent);
+        if (result.isDoc) {
+          $body = staticDocument.body || staticDocument.documentElement;
+          arrayEach_1(['webkit', 'khtml', 'moz', 'ms', 'o'], function (core) {
+            result['-' + core] = !!$body[core + 'MatchesSelector'];
+          });
+        }
+        assign(result, {
+          edge: isEdge,
+          firefox: isBrowseType('Firefox'),
+          msie: !isEdge && result['-ms'],
+          safari: !isChrome && !isEdge && isBrowseType('Safari'),
+          isMobile: isMobile,
+          isPC: !isMobile,
+          isLocalStorage: isBrowseStorage(staticWindow.localStorage),
+          isSessionStorage: isBrowseStorage(staticWindow.sessionStorage)
+        });
+      }
+      return result
+    }
+
+    var browser_1 = browser;
+
+    var bom = {
+    	browser: browser_1
+    };
+
     // array
     let arrayEqual$1 = array.arrayEqual;
+    let arrayEach$1 = array.arrayEach;
     // cookie
     let setCookie$1 = cookie.setCookie;
     let getCookie$1 = cookie.getCookie;
@@ -188,15 +282,19 @@
     let object2UrlQuery$1 = url.object2UrlQuery;
     // type
     let toType$1 = type.toType;
+    // bom
+    let browser$1 = bom.browser;
 
     let utils = {
     	arrayEqual: arrayEqual$1,
+    	arrayEach: arrayEach$1,
     	setCookie: setCookie$1,
     	getCookie: getCookie$1,
     	removeCookie: removeCookie$1,
     	urlQuery2Object: urlQuery2Object$1,
     	object2UrlQuery: object2UrlQuery$1,
-    	toType: toType$1
+    	toType: toType$1,
+    	browser: browser$1
     };
 
     var unxUtils = utils;
