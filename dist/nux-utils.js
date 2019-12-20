@@ -155,6 +155,28 @@
       object2UrlQuery: object2UrlQuery_1
     };
 
+    // 此模块借鉴jquery
+    let class2type = {},
+        toString =  class2type.toString;
+    let typeArr = "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " );
+    typeArr.forEach(name => {
+      class2type[ "[object " + name + "]" ] = name.toLowerCase();
+    });
+    function toType( obj ) {
+    	if ( obj == null ) {
+    		return obj + "";
+    	}
+    	return typeof obj === "object" ?
+    		class2type[ toString.call( obj ) ] || "object" :
+    		typeof obj;
+    }
+
+    var toType_1 = toType;
+
+    var type = {
+      toType: toType_1
+    };
+
     // array
     let arrayEqual$1 = array.arrayEqual;
     // cookie
@@ -164,7 +186,8 @@
     // url
     let urlQuery2Object$1 = url.urlQuery2Object;
     let object2UrlQuery$1 = url.object2UrlQuery;
-
+    // type
+    let toType$1 = type.toType;
 
     let utils = {
     	arrayEqual: arrayEqual$1,
@@ -172,9 +195,12 @@
     	getCookie: getCookie$1,
     	removeCookie: removeCookie$1,
     	urlQuery2Object: urlQuery2Object$1,
-    	object2UrlQuery: object2UrlQuery$1
+    	object2UrlQuery: object2UrlQuery$1,
+    	toType: toType$1
     };
 
-    return utils;
+    var unxUtils = utils;
+
+    return unxUtils;
 
 })));

@@ -1,6 +1,8 @@
-import array from './src/array/index.js'
-import cookie from './src/cookie/index.js'
-import url from './src/url/index.js'
+const array = require('./src/array/index.js')
+const cookie = require('./src/cookie/index.js')
+const url = require('./src/url/index.js')
+const type = require('./src/type/index.js')
+
 // array
 let arrayEqual = array.arrayEqual;
 // cookie
@@ -10,7 +12,8 @@ let removeCookie = cookie.removeCookie;
 // url
 let urlQuery2Object = url.urlQuery2Object;
 let object2UrlQuery = url.object2UrlQuery;
-
+// type
+let toType = type.toType;
 
 let utils = {
 	arrayEqual,
@@ -18,7 +21,8 @@ let utils = {
 	getCookie,
 	removeCookie,
 	urlQuery2Object,
-	object2UrlQuery
+	object2UrlQuery,
+	toType
 };
 
-export default utils;
+module.exports = utils;
