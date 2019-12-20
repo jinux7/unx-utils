@@ -24,4 +24,4 @@ function object2UrlQuery(obj) {
     return pairs.join('&');
 }
 
-export default object2UrlQuery;
+module.exports = object2UrlQuery;

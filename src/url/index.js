@@ -1,7 +1,7 @@
-import urlQuery2Object from './urlQuery2Object.js';
-import object2UrlQuery from './object2UrlQuery.js';
+const urlQuery2Object = require('./urlQuery2Object.js');
+const object2UrlQuery = require('./object2UrlQuery.js');
 
-export default {
+module.exports = {
   urlQuery2Object,
   object2UrlQuery
 }

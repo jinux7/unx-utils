@@ -26,4 +26,4 @@ const setCookie = function (name, value, expires, domain, path, secure) {
   document.cookie = cookieText;
 };
 
-export default setCookie;
+module.exports = setCookie;

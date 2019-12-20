@@ -21,4 +21,4 @@ function urlQuery2Object(url) {
   return query;
 }
 
-export default urlQuery2Object;
+module.exports = urlQuery2Object;

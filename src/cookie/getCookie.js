@@ -17,4 +17,4 @@ const getCookie = function (name) {
     return cookieValue; 
 };
 
-export default getCookie;
+module.exports = getCookie;

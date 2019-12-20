@@ -1,8 +1,8 @@
-import setCookie from './setCookie.js'
-import getCookie from './getCookie.js'
-import removeCookie from './removeCookie.js'
+const setCookie = require('./setCookie.js');
+const getCookie = require('./getCookie.js');
+const removeCookie = require('./removeCookie.js');
 
-export default {
+module.exports = {
   setCookie,
   getCookie,
   removeCookie

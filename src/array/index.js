@@ -1,5 +1,5 @@
-import arrayEqual from './arrayEqual.js'
+const arrayEqual = require('./arrayEqual.js');
 
-export default {
+module.exports = {
 	arrayEqual
 }

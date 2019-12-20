@@ -20,8 +20,10 @@
         return true;
     }
 
+    var arrayEqual_1 = arrayEqual;
+
     var array = {
-    	arrayEqual
+    	arrayEqual: arrayEqual_1
     };
 
     /**
@@ -52,6 +54,8 @@
       document.cookie = cookieText;
     };
 
+    var setCookie_1 = setCookie;
+
     /**
      * @desc 获取cookie的操作
      * @param {String} name cookie的名
@@ -71,6 +75,8 @@
         return cookieValue; 
     };
 
+    var getCookie_1 = getCookie;
+
     /**
      * @desc 获取cookie的操作
      * @param {String} name cookie的名
@@ -80,13 +86,15 @@
      */
 
     const removeCookie = function (name, domain, path, secure) {
-        setCookie(name, "", Date(0), domain, path, secure);
+        setCookie_1(name, "", Date(0), domain, path, secure);
     };
 
+    var removeCookie_1 = removeCookie;
+
     var cookie = {
-      setCookie,
-      getCookie,
-      removeCookie
+      setCookie: setCookie_1,
+      getCookie: getCookie_1,
+      removeCookie: removeCookie_1
     };
 
     /**
@@ -111,6 +119,8 @@
       }
       return query;
     }
+
+    var urlQuery2Object_1 = urlQuery2Object;
 
     /**
      * 
@@ -138,9 +148,11 @@
         return pairs.join('&');
     }
 
+    var object2UrlQuery_1 = object2UrlQuery;
+
     var url = {
-      urlQuery2Object,
-      object2UrlQuery
+      urlQuery2Object: urlQuery2Object_1,
+      object2UrlQuery: object2UrlQuery_1
     };
 
     // array

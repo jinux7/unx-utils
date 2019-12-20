@@ -1,4 +1,4 @@
-import setCookie from './setCookie';
+const setCookie = require('./setCookie');
 /**
  * @desc 获取cookie的操作
  * @param {String} name cookie的名
@@ -11,4 +11,4 @@ const removeCookie = function (name, domain, path, secure) {
     setCookie(name, "", Date(0), domain, path, secure);
 };
 
-export default removeCookie;
+module.exports = removeCookie;
