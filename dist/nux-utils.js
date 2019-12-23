@@ -47,6 +47,128 @@
     	arrayEach: arrayEach_1
     };
 
+    var class2type = {};
+
+    /**
+     * @desc 判断指定参数是否是一个纯粹的对象，所谓"纯粹的对象"，就是该对象是通过"{}"或"new Object"创建的。
+     * @param { Object }
+     * @return { Boolean }
+     */
+
+    const getProto = Object.getPrototypeOf;
+    const hasOwn = class2type.hasOwnProperty;
+    const fnToString = hasOwn.toString;
+    const ObjectFunctionString = fnToString.call( Object );
+
+    const isPlainObject = function( obj ) {
+      var proto, Ctor;
+
+      // Detect obvious negatives
+      // Use toString instead of jQuery.type to catch host objects
+      if ( !obj || toString.call( obj ) !== "[object Object]" ) {
+        return false;
+      }
+
+      proto = getProto( obj );
+
+      // Objects with no prototype (e.g., `Object.create( null )`) are plain
+      if ( !proto ) {
+        return true;
+      }
+
+      // Objects with prototype are plain iff they were constructed by a global Object function
+      Ctor = hasOwn.call( proto, "constructor" ) && proto.constructor;
+      return typeof Ctor === "function" && fnToString.call( Ctor ) === ObjectFunctionString;
+    };
+
+    var isPlainObject_1 = isPlainObject;
+
+    /**
+     * @desc 这是一个assign函数，也可以叫做extend函数，这里的代码完全copy自jquery4.0-pre版本
+     * @param { boolean } 可传可不传,传true,深assign
+     * @param { Object } assign的目标对象
+     * @param { Object } assign的源对象
+     */
+
+    const assign = function() {
+    	var options, name, src, copy, copyIsArray, clone,
+    		target = arguments[ 0 ] || {},
+    		i = 1,
+    		length = arguments.length,
+    		deep = false;
+
+    	// Handle a deep copy situation
+    	if ( typeof target === "boolean" ) {
+    		deep = target;
+
+    		// Skip the boolean and the target
+    		target = arguments[ i ] || {};
+    		i++;
+    	}
+
+    	// Handle case when target is a string or something (possible in deep copy)
+    	if ( typeof target !== "object" && typeof target !== "function" ) {
+    		target = {};
+    	}
+
+      // 此处是jquery源码中，如果只有一个对象，那么把这个对象的属性直接assign到jquery的实例中去，这里不需要
+    	// Extend jQuery itself if only one argument is passed
+    	// if ( i === length ) {
+    	// 	target = this;
+    	// 	i--;
+    	// }
+
+    	for ( ; i < length; i++ ) {
+
+    		// Only deal with non-null/undefined values
+    		if ( ( options = arguments[ i ] ) != null ) {
+
+    			// Extend the base object
+    			for ( name in options ) {
+    				copy = options[ name ];
+
+    				// Prevent Object.prototype pollution
+    				// Prevent never-ending loop
+    				if ( name === "__proto__" || target === copy ) {
+    					continue;
+    				}
+
+    				// Recurse if we're merging plain objects or arrays
+    				if ( deep && copy && ( isPlainObject_1( copy ) ||
+    					( copyIsArray = Array.isArray( copy ) ) ) ) {
+    					src = target[ name ];
+
+    					// Ensure proper type for the source value
+    					if ( copyIsArray && !Array.isArray( src ) ) {
+    						clone = [];
+    					} else if ( !copyIsArray && !isPlainObject_1( src ) ) {
+    						clone = {};
+    					} else {
+    						clone = src;
+    					}
+    					copyIsArray = false;
+
+    					// Never move original objects, clone them
+    					target[ name ] = assign( deep, clone, copy );
+
+    				// Don't bring in undefined values
+    				} else if ( copy !== undefined ) {
+    					target[ name ] = copy;
+    				}
+    			}
+    		}
+    	}
+
+    	// Return the modified object
+    	return target;
+    };
+    var assign_1 = assign;
+
+    var object = {
+      isPlainObject: isPlainObject_1,
+      assign: assign_1
+    };
+
     /**
      * @desc 对cookie的设置操作
      * @param {String} name cookie的名
@@ -177,8 +299,13 @@
     };
 
     // 此模块借鉴jquery
-    let class2type = {},
-        toString =  class2type.toString;
+    /**
+     * @desc 返回所传参数的类型
+     * @param { any }
+     * @return { String } 具体的类型
+     */
+
+    const toString$1 =  class2type.toString;
     let typeArr = "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " );
     typeArr.forEach(name => {
       class2type[ "[object " + name + "]" ] = name.toLowerCase();
@@ -188,7 +315,7 @@
     		return obj + "";
     	}
     	return typeof obj === "object" ?
-    		class2type[ toString.call( obj ) ] || "object" :
+    		class2type[ toString$1.call( obj ) ] || "object" :
     		typeof obj;
     }
 
@@ -198,15 +325,16 @@
       toType: toType_1
     };
 
+    var strUndefined = {};
+
     /**
      * @desc 获取浏览器的内核属性等信息
      * @return {Object} 例：{"isNode":false,"isMobile":true,"isPC":false,"isDoc":true,"-webkit":true,"-khtml":false,"-moz":false,"-ms":false,"-o":false,"edge":false,"firefox":false,"msie":false,"safari":true,"isLocalStorage":true,"isSessionStorage":true}
      */
-    var staticStrUndefined = 'undefined';
-    var staticDocument = typeof document === staticStrUndefined ? 0 : document;
-    var staticWindow = typeof window === staticStrUndefined ? 0 : window;
 
-    var assign = Object.assign;
+    const staticDocument = typeof document === strUndefined ? 0 : document;
+    const staticWindow = typeof window === strUndefined ? 0 : window;
+
 
 
     /* eslint-disable valid-typeof */
@@ -238,7 +366,7 @@
         isPC: false,
         isDoc: !!staticDocument
       };
-      if (!staticWindow && typeof process !== staticStrUndefined) {
+      if (!staticWindow && typeof process !== strUndefined) {
         result.isNode = true;
       } else {
         isEdge = isBrowseType('Edge');
@@ -250,7 +378,7 @@
             result['-' + core] = !!$body[core + 'MatchesSelector'];
           });
         }
-        assign(result, {
+        assign_1(result, {
           edge: isEdge,
           firefox: isBrowseType('Firefox'),
           msie: !isEdge && result['-ms'],
@@ -270,9 +398,63 @@
     	browser: browser_1
     };
 
+    var document$1 = window.document;
+
+    /**
+     * @desc 动态的向dom文档中插入script语句并执行
+     * @param { String } js语句的字符串
+     * @return { void }
+     */
+
+
+    var preservedScriptAttributes = {
+    	type: true,
+    	src: true,
+    	nonce: true,
+    	noModule: true
+    };
+
+    function DomEval( code, node, doc ) {
+    	doc = doc || document$1;
+
+    	var i, val,
+    		script = doc.createElement( "script" );
+
+    	script.text = code;
+    	if ( node ) {
+    		for ( i in preservedScriptAttributes ) {
+
+    			// Support: Firefox <=64 - 66+, Edge <=18+
+    			// Some browsers don't support the "nonce" property on scripts.
+    			// On the other hand, just using `getAttribute` is not enough as
+    			// the `nonce` attribute is reset to an empty string whenever it
+    			// becomes browsing-context connected.
+    			// See https://github.com/whatwg/html/issues/2369
+    			// See https://html.spec.whatwg.org/#nonce-attributes
+    			// The `node.getAttribute` check was added for the sake of
+    			// `jQuery.globalEval` so that it can fake a nonce-containing node
+    			// via an object.
+    			val = node[ i ] || node.getAttribute && node.getAttribute( i );
+    			if ( val ) {
+    				script.setAttribute( i, val );
+    			}
+    		}
+    	}
+    	doc.head.appendChild( script ).parentNode.removeChild( script );
+    }
+
+    var domEval = DomEval;
+
+    var dom = {
+      domEval
+    };
+
     // array
     let arrayEqual$1 = array.arrayEqual;
     let arrayEach$1 = array.arrayEach;
+    // object
+    let isPlainObject$1 = object.isPlainObject;
+    let assign$1 = object.assign;
     // cookie
     let setCookie$1 = cookie.setCookie;
     let getCookie$1 = cookie.getCookie;
@@ -284,17 +466,29 @@
     let toType$1 = type.toType;
     // bom
     let browser$1 = bom.browser;
+    // dom
+    let domEval$1 = dom.domEval;
 
     let utils = {
+    	// array
     	arrayEqual: arrayEqual$1,
     	arrayEach: arrayEach$1,
+    	// object
+    	isPlainObject: isPlainObject$1,
+    	assign: assign$1,
+    	// cookie
     	setCookie: setCookie$1,
     	getCookie: getCookie$1,
     	removeCookie: removeCookie$1,
+    	// url
     	urlQuery2Object: urlQuery2Object$1,
     	object2UrlQuery: object2UrlQuery$1,
+    	// type
     	toType: toType$1,
-    	browser: browser$1
+    	// bom
+    	browser: browser$1,
+    	// dom
+    	domEval: domEval$1
     };
 
     var unxUtils = utils;

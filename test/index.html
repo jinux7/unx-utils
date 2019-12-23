@@ -9,7 +9,10 @@
 </head>
 <body>
   <script>
-    console.log(JSON.stringify(nuxUtils.browser()), 998);
+    // 测试domEval()
+    nuxUtils.domEval('alert(112)');
+    // 测试browser()
+    console.log(nuxUtils.browser());
   </script>
 </body>
 </html>

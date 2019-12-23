@@ -2,12 +2,11 @@
  * @desc 获取浏览器的内核属性等信息
  * @return {Object} 例：{"isNode":false,"isMobile":true,"isPC":false,"isDoc":true,"-webkit":true,"-khtml":false,"-moz":false,"-ms":false,"-o":false,"edge":false,"firefox":false,"msie":false,"safari":true,"isLocalStorage":true,"isSessionStorage":true}
  */
-var staticStrUndefined = 'undefined';
-var staticDocument = typeof document === staticStrUndefined ? 0 : document;
-var staticWindow = typeof window === staticStrUndefined ? 0 : window;
-
-var assign = Object.assign;
-var arrayEach = require('../array/arrayEach')
+const staticStrUndefined = require('../var/strUndefined');
+const staticDocument = typeof document === staticStrUndefined ? 0 : document;
+const staticWindow = typeof window === staticStrUndefined ? 0 : window;
+const assign = require('../object/assign');
+const arrayEach = require('../array/arrayEach')
 
 /* eslint-disable valid-typeof */
 function isBrowseStorage (storage) {

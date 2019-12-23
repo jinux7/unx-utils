@@ -5,6 +5,12 @@ javascript基础工具集合
 |  工具函数名   | 功能  |
 |  ----  | ----  |
 | arrayEqual  | 判断两个数组是否相等 |
+| arrayEach  | 遍历数组操作 |
+### object
+|  工具函数名   | 功能  |
+|  ----  | ----  |
+| isPlainObject  | 判断是否为纯粹的对象 |
+| assign  | assign函数 |
 ### cookie
 |  工具函数名   | 功能  |
 |  ----  | ----  |
@@ -16,6 +22,14 @@ javascript基础工具集合
 |  ----  | ----  |
 | urlQuery2Object  | 解析url的参数以对象的形式返回 |
 | object2UrlQuery  | 将一个对象转成name=mike&age=6这种url参数字符串
+### bom
+|  工具函数名   | 功能  |
+|  ----  | ----  |
+| browser  | 获取浏览器的基本信息 |
+### dom
+|  工具函数名   | 功能  |
+|  ----  | ----  |
+| domEval  | 动态的执行script代码 |
 
 ## 关于测试
 本项目的工具函数代码都会做单元测试，覆盖率争取达到95%以上。 |
