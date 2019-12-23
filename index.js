@@ -5,6 +5,7 @@ const url = require('./src/url/index.js')
 const type = require('./src/type/index.js')
 const bom = require('./src/bom/index.js')
 const dom = require('./src/dom/index.js')
+const string = require('./src/string/index.js')
 
 // array
 let arrayEqual = array.arrayEqual;
@@ -25,7 +26,9 @@ let toType = type.toType;
 let browser = bom.browser;
 // dom
 let domEval = dom.domEval;
-
+let trigger = dom.trigger;
+// string
+let price2chinese = string.price2chinese;
 let utils = {
 	// array
 	arrayEqual,
@@ -45,7 +48,10 @@ let utils = {
 	// bom
 	browser,
 	// dom
-	domEval
+	domEval,
+	trigger,
+	// string
+	price2chinese,
 };
 
 module.exports = utils;

@@ -401,7 +401,7 @@
     var document$1 = window.document;
 
     /**
-     * @desc 动态的向dom文档中插入script语句并执行
+     * @desc 动态的向dom文档中插入script语句并执行,代码copy自jquery4.0-pre
      * @param { String } js语句的字符串
      * @return { void }
      */
@@ -445,8 +445,84 @@
 
     var domEval = DomEval;
 
+    /**
+     * @desc 手动触发dom事件函数
+     * @param { Element } el dom节点元素 
+     * @param { String } evt 事件名称
+     * @param { Object } detail 对该事件的描述信息对象 
+     */
+    const trigger = function(el, evt, detail) {
+    	detail = detail || {};
+        var e, opt = {
+                bubbles: true,
+                cancelable: true,
+                detail: detail
+            };
+
+        try {
+            if (typeof CustomEvent !== 'undefined') {
+                e = new CustomEvent(evt, opt);
+                if (el) {
+                    el.dispatchEvent(e);
+                }
+            } else {
+                e = document.createEvent("CustomEvent");
+                e.initCustomEvent(evt, true, true, detail);
+                if (el) {
+                    el.dispatchEvent(e);
+                }
+            }
+        } catch (ex) {
+            console.warn("jinux-trigger is not supported by environment.");
+        }
+    };
+
+    var trigger_1 = trigger;
+
     var dom = {
-      domEval
+      domEval,
+      trigger: trigger_1
+    };
+
+    /**
+     * @desc   现金额转大写
+     * @param  { Number } n 
+     * @return { String }
+     */
+    function price2chinese(n) {
+      var fraction = ['角', '分'];
+      var digit = [
+          '零', '壹', '贰', '叁', '肆',
+          '伍', '陆', '柒', '捌', '玖'
+      ];
+      var unit = [
+          ['元', '万', '亿'],
+          ['', '拾', '佰', '仟']
+      ];
+      var head = n < 0 ? '欠' : '';
+      n = Math.abs(n);
+      var s = '';
+      for (var i = 0; i < fraction.length; i++) {
+          s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
+      }
+      s = s || '整';
+      n = Math.floor(n);
+      for (var i = 0; i < unit[0].length && n > 0; i++) {
+          var p = '';
+          for (var j = 0; j < unit[1].length && n > 0; j++) {
+              p = digit[n % 10] + unit[1][j] + p;
+              n = Math.floor(n / 10);
+          }
+          s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+      }
+      return head + s.replace(/(零.)*零元/, '元')
+          .replace(/(零.)+/g, '零')
+          .replace(/^整$/, '零元整');
+    }
+    var price2chinese_1 = price2chinese;
+
+    var string = {
+      price2chinese: price2chinese_1
     };
 
     // array
@@ -468,7 +544,9 @@
     let browser$1 = bom.browser;
     // dom
     let domEval$1 = dom.domEval;
-
+    let trigger$1 = dom.trigger;
+    // string
+    let price2chinese$1 = string.price2chinese;
     let utils = {
     	// array
     	arrayEqual: arrayEqual$1,
@@ -488,7 +566,10 @@
     	// bom
     	browser: browser$1,
     	// dom
-    	domEval: domEval$1
+    	domEval: domEval$1,
+    	trigger: trigger$1,
+    	// string
+    	price2chinese: price2chinese$1,
     };
 
     var unxUtils = utils;

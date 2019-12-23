@@ -8,11 +8,23 @@
   <script src="/dist/nux-utils.js"></script>
 </head>
 <body>
+  <div id="test-trigger" style="border: 1px solid #000000; padding: 20px;">
+    <h3>trigger-test</h3>
+    <button id="test-trigger-btn1">btn1</button>
+    <button id="test-trigger-btn2">点击利用trigger来触发btn1的click事件</button>
+  </div>
   <script>
     // 测试domEval()
-    nuxUtils.domEval('alert(112)');
+    nuxUtils.domEval('alert("测试domEval()")');
     // 测试browser()
     console.log(nuxUtils.browser());
+    // 测试trigger
+    document.getElementById('test-trigger-btn1').addEventListener('click', function(ev) {
+      alert('test-trigger-btn1按钮点击');
+    }, false);
+    document.getElementById('test-trigger-btn2').addEventListener('click', function(ev) {
+      nuxUtils.trigger(document.getElementById('test-trigger-btn1'), 'click');
+    }, false);
   </script>
 </body>
 </html>

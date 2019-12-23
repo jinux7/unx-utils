@@ -11,5 +11,6 @@ require('./url/url-test.js');
 require('./cookie/cookie-test.js');
 require('./type/type-test.js');
 require('./object/object-test.js');
+require('./string/string-test.js');
 // require('./dom/dom-test.js'); // 暂时无法测试,在test/index.html测试
 // require('./bom/bom-test.js'); // 暂时无法测试,在test/index.html测试
