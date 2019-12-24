@@ -38,7 +38,7 @@ javascript基础工具集合
 ### date
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
-| date2string  | 将数字价格转换为大写中文 | 1).date2string();2).date2string(new Date()),3).date2string('~');4).date2string(true');5).date2string(new Date(),'~');6).date2string(new Date(),true);7).date2string('~',true);8).date2string(new Date(),'~',true); |
+| date2string  | 将数字价格转换为大写中文 | 1).date2string();<br/>2).date2string(new Date());<br/>3).date2string('~');<br/>4).date2string(true);<br/>5).date2string(new Date(),'~');<br/>6).date2string(new Date(),true);<br/>7).date2string('~',true);<br/>8).date2string(new Date(),'~',true);
 
 ## 关于测试
 本项目的工具函数代码都会做单元测试，覆盖率争取达到95%以上。 
