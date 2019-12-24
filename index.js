@@ -6,6 +6,7 @@ const type = require('./src/type/index.js')
 const bom = require('./src/bom/index.js')
 const dom = require('./src/dom/index.js')
 const string = require('./src/string/index.js')
+const date = require('./src/date/index.js')
 
 // array
 let arrayEqual = array.arrayEqual;
@@ -29,6 +30,11 @@ let domEval = dom.domEval;
 let trigger = dom.trigger;
 // string
 let price2chinese = string.price2chinese;
+// date
+let date2string = date.date2string;
+let getRangeDate = date.getRangeDate;
+
+
 let utils = {
 	// array
 	arrayEqual,
@@ -52,6 +58,9 @@ let utils = {
 	trigger,
 	// string
 	price2chinese,
+	// date
+	date2string,
+	getRangeDate,
 };
 
 module.exports = utils;
