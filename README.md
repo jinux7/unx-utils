@@ -1,6 +1,6 @@
 # unx-utils
 javascript基础工具集合
-## 模块功划分
+## 模块功能划分
 ### array
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
@@ -45,6 +45,7 @@ javascript基础工具集合
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
 | randomNum  | 获取区间范围内的随机数 | randomNum(2,10,true)<br/>randomNum(2,10,false) |
+| randomColor  | 获取一个随机的颜色 | randomColor() |
 ## 关于测试
 本项目的工具函数代码都会做单元测试，覆盖率争取达到95%以上。 
 

@@ -37,7 +37,8 @@ let price2chinese = string.price2chinese;
 let date2string = date.date2string;
 let getRangeDate = date.getRangeDate;
 // random
-let random = random.randomNum;
+let randomNum = random.randomNum;
+let randomColor = random.randomColor;
 
 let utils = {
 	// array
@@ -68,7 +69,8 @@ let utils = {
 	date2string,
 	getRangeDate,
 	//random
-	random,
+	randomNum,
+	randomColor
 };
 
 module.exports = utils;

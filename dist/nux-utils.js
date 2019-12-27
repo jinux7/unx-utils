@@ -164,9 +164,65 @@
     };
     var assign_1 = assign;
 
+    /**
+     * @desc 深拷贝，支持常见类型
+     * @param { Any } values
+     * @return { Any } values
+     */
+    function deepClone(values) {
+      var copy;
+
+      // Handle the 3 simple types, and null or undefined
+      if (null == values || "object" != typeof values) return values;
+
+      // Handle Date
+      if (values instanceof Date) {
+          copy = new Date();
+          copy.setTime(values.getTime());
+          return copy;
+      }
+
+      // Handle Array
+      if (values instanceof Array) {
+          copy = [];
+          for (var i = 0, len = values.length; i < len; i++) {
+              copy[i] = deepClone(values[i]);
+          }
+          return copy;
+      }
+
+      // Handle Object
+      if (values instanceof Object) {
+          copy = {};
+          for (var attr in values) {
+              if (values.hasOwnProperty(attr)) copy[attr] = deepClone(values[attr]);
+          }
+          return copy;
+      }
+
+      throw new Error("Unable to copy values! Its type isn't supported.");
+    }
+
+    var deepClone_1 = deepClone;
+
+    /**
+     * @desc   判断`obj`是否为空
+     * @param  { Any } obj
+     * @return {Boolean}
+     */
+    function isEmptyObject(obj) {
+      if (!obj || typeof obj !== 'object' || Array.isArray(obj))
+          return false
+      return !Object.keys(obj).length
+    }
+
+    var isEmptyObject_1 = isEmptyObject;
+
     var object = {
       isPlainObject: isPlainObject_1,
-      assign: assign_1
+      assign: assign_1,
+      deepClone: deepClone_1,
+      isEmptyObject: isEmptyObject_1
     };
 
     /**
@@ -525,12 +581,145 @@
       price2chinese: price2chinese_1
     };
 
+    const date2string = function(argDate, argFormatStr,argShowTime) {
+      let args = arguments, 
+          date = argDate || new Date(), 
+          formatStr = argFormatStr,
+          showTime = argShowTime,
+         result;
+      if(args.length===0) formatStr = '-';
+      if(args.length===1) {
+        if(toType_1(date)==='string') {
+          formatStr = date;
+          date = new Date();
+        }else if(toType_1(date)=='date') {
+          formatStr = '-';
+        }else if(toType_1(date)==='boolean') {
+          date = new Date();
+          formatStr = '-';
+          showTime = argDate;
+        }else {
+          return 'arguments error'
+        }
+      }
+      if(args.length===2) {
+        if(toType_1(date)==='date'&&toType_1(formatStr)==='string') ;else if(toType_1(date)==='date'&&toType_1(formatStr)==='boolean') {
+          formatStr = '-';
+          showTime = argFormatStr;
+        }else if(toType_1(date)==='string'&&toType_1(formatStr)==='boolean') {
+          date = new Date();
+          formatStr = argDate;
+          showTime = argFormatStr;
+        }else {
+          return 'arguments error';
+        }
+      }
+      if((args.length>=3)&&(toType_1(date)!=='date'||toType_1(formatStr)!='string'||toType_1(showTime)!='boolean')) {
+        return 'arguments error';
+      }
+      let year = date.getFullYear(),
+          month = date.getMonth()+1>9?(date.getMonth()+1):('0'+(date.getMonth()+1)),
+          day = date.getDate()>9?(date.getDate()):('0'+(date.getDate()));
+      let hour = date.getHours()>9?(date.getHours()):('0'+(date.getHours())),
+          minute = date.getMinutes()>9?(date.getMinutes()):('0'+(date.getMinutes())),
+          second = date.getSeconds()>9?(date.getSeconds()):('0'+(date.getSeconds()));
+      result = year + formatStr + month + formatStr + day;
+      if(showTime) result += ' ' + hour + ':' + minute + ':' + second;
+      return result;
+    };
+
+    var date2string_1 = date2string;
+
+    /**
+     * @desc 获取今日，本周，本月的日期
+     * @param { String } 'today' 'week' 'month'
+     * @param { String } '-' '/' '~' default '-'
+     * @return { Array } 今日['2018/08/20', '2018/08/20'] 本周['2018/08/19', '2018/08/25'] 本月['2018/08/01', '2018/08/31']
+     */
+      const getRangeDate = function(type, split) {
+      	// 年月日之间的间隔符
+        let splitStr = split || '-';
+
+        if(type==='today') {
+          let date = new Date();
+          let y = date.getFullYear(),
+              m = date.getMonth()+1>9?(date.getMonth()+1):('0'+(date.getMonth()+1)),
+              d = date.getDate()>9?(date.getDate()):('0'+(date.getDate()));
+          let dateStr = y + splitStr + m + splitStr + d ;
+          return [dateStr, dateStr]
+        }else if(type==='week'){
+          let date = new Date(), arr = [];
+          let y = date.getFullYear(),
+              m = date.getMonth()+1>9?(date.getMonth()+1):('0'+(date.getMonth()+1)),
+              w = date.getDay(),
+              d = date.getDate();
+          date.setDate(d-w);
+          arr.push(y + splitStr + m + splitStr + date.getDate());
+          date.setDate(date.getDate()+6);
+          arr.push(y + splitStr + m + splitStr + date.getDate());
+          return arr;      
+        }else {
+          let date = new Date(), arr = [], _m, d;
+          let y = date.getFullYear(),
+              m = date.getMonth()+1>9?(date.getMonth()+1):('0'+(date.getMonth()+1));
+          arr.push(y + splitStr + m + splitStr + '01');
+          _m = date.getMonth();
+          date.setDate(1);
+          date.setMonth(_m + 1);
+          date.setDate(0);
+          d = date.getDate();
+          arr.push(y + splitStr + m + splitStr + d);
+          return arr;
+        }
+      };
+
+      var getRangeDate_1 = getRangeDate;
+
+    var date = {
+      date2string: date2string_1,
+      getRangeDate: getRangeDate_1
+    };
+
+    /**
+     * @desc 生成指定范围[min, max]的随机数
+     * @param  { Number } min 
+     * @param  { Number } max 
+     * @param  { bInt } 返回值是否为整数
+     * @return { Number } 
+     */
+    function randomNum(min, max, bInt) {
+      if(bInt) {
+        return Math.floor(Math.random() * (max-min+1) )+ min;
+      }else {
+        return Math.random() * (max-min) + min;
+      }
+    }
+
+    var randomNum_1 = randomNum;
+
+    /**
+     * @desc 随机生成颜色
+     * @return { String } #ffffff
+     */
+    function randomColor() {
+      return '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
+    }
+
+    var randomColor_1 = randomColor;
+
+    var random = {
+      randomNum: randomNum_1,
+      randomColor: randomColor_1
+    };
+
     // array
     let arrayEqual$1 = array.arrayEqual;
     let arrayEach$1 = array.arrayEach;
     // object
     let isPlainObject$1 = object.isPlainObject;
     let assign$1 = object.assign;
+    let deepClone$1 = object.deepClone;
+    let isEmptyObject$1 = object.isEmptyObject;
     // cookie
     let setCookie$1 = cookie.setCookie;
     let getCookie$1 = cookie.getCookie;
@@ -547,6 +736,13 @@
     let trigger$1 = dom.trigger;
     // string
     let price2chinese$1 = string.price2chinese;
+    // date
+    let date2string$1 = date.date2string;
+    let getRangeDate$1 = date.getRangeDate;
+    // random
+    let randomNum$1 = random.randomNum;
+    let randomColor$1 = random.randomColor;
+
     let utils = {
     	// array
     	arrayEqual: arrayEqual$1,
@@ -554,6 +750,8 @@
     	// object
     	isPlainObject: isPlainObject$1,
     	assign: assign$1,
+    	deepClone: deepClone$1,
+    	isEmptyObject: isEmptyObject$1,
     	// cookie
     	setCookie: setCookie$1,
     	getCookie: getCookie$1,
@@ -570,6 +768,12 @@
     	trigger: trigger$1,
     	// string
     	price2chinese: price2chinese$1,
+    	// date
+    	date2string: date2string$1,
+    	getRangeDate: getRangeDate$1,
+    	//random
+    	randomNum: randomNum$1,
+    	randomColor: randomColor$1
     };
 
     var unxUtils = utils;
