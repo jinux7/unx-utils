@@ -11,6 +11,7 @@ javascript基础工具集合
 |  ----  | ----  | ----  |
 | isPlainObject  | 判断是否为纯粹的对象 | isPlainObject({name: 'mike'}) |
 | assign  | assign函数 | assign(false, targetObj, obj1, obj2 [,obj3...]) |
+| deepClone  | 深度克隆对象 | deepClone({name: 'mike', like: ['ball1','ball2','ball3']}) |
 ### cookie
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
@@ -40,7 +41,10 @@ javascript基础工具集合
 |  ----  | ----  | ----  |
 | getRangeDate  | 获取今天，本周，本月的区间日期 | 1)getRangeDate('today')<br/>2)getRangeDate('week')<br/>3)getRangeDate('month')<br/> |
 | date2string  | 获取日期的格式化字符串 | 1)date2string()<br/>2)date2string(new Date())<br/>3)date2string('\~')<br/>4)date2string(true)<br/>5)date2string(new Date(),'\~')<br/>6)date2string(new Date(),true)<br/>7)date2string('\~',true)<br/>8)date2string(new Date(),'\~',true) |
-
+### random
+|  工具函数名   | 功能  | 用法 |
+|  ----  | ----  | ----  |
+| randomNum  | 获取区间范围内的随机数 | randomNum(2,10,true)<br/>randomNum(2,10,false) |
 ## 关于测试
 本项目的工具函数代码都会做单元测试，覆盖率争取达到95%以上。 
 

@@ -7,6 +7,7 @@ const bom = require('./src/bom/index.js')
 const dom = require('./src/dom/index.js')
 const string = require('./src/string/index.js')
 const date = require('./src/date/index.js')
+const random = require('./src/random/index.js')
 
 // array
 let arrayEqual = array.arrayEqual;
@@ -14,6 +15,8 @@ let arrayEach = array.arrayEach;
 // object
 let isPlainObject = object.isPlainObject;
 let assign = object.assign;
+let deepClone = object.deepClone;
+let isEmptyObject = object.isEmptyObject;
 // cookie
 let setCookie = cookie.setCookie;
 let getCookie = cookie.getCookie;
@@ -33,7 +36,8 @@ let price2chinese = string.price2chinese;
 // date
 let date2string = date.date2string;
 let getRangeDate = date.getRangeDate;
-
+// random
+let random = random.randomNum;
 
 let utils = {
 	// array
@@ -42,6 +46,8 @@ let utils = {
 	// object
 	isPlainObject,
 	assign,
+	deepClone,
+	isEmptyObject,
 	// cookie
 	setCookie,
 	getCookie,
@@ -61,6 +67,8 @@ let utils = {
 	// date
 	date2string,
 	getRangeDate,
+	//random
+	random,
 };
 
 module.exports = utils;
