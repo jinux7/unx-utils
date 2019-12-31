@@ -712,6 +712,114 @@
       randomColor: randomColor_1
     };
 
+    /**
+      * @desc 创建一个防反跳策略函数，在函数最后一次调用多少毫秒之后才会再次执行，如果在期间内重复调用会重新计算延迟
+      * @param { Function } callback 回调
+      * @param { Number } wait 多少秒毫
+      * @param { Object } options 参数{leading: 是否在之前执行, trailing: 是否在之后执行}
+      * @return { Function }
+      */
+     function debounce (callback, wait, options) {
+      var args, context;
+      var opts = options || {};
+      var runFlag = false;
+      var timeout = 0;
+      var isLeading = typeof options === 'boolean';
+      var optLeading = 'leading' in opts ? opts.leading : isLeading;
+      var optTrailing = 'trailing' in opts ? opts.trailing : !isLeading;
+      var runFn = function () {
+        runFlag = true;
+        timeout = 0;
+        callback.apply(context, args);
+      };
+      var endFn = function () {
+        if (optLeading === true) {
+          timeout = 0;
+        }
+        if (!runFlag && optTrailing === true) {
+          runFn();
+        }
+      };
+      var cancelFn = function () {
+        var rest = timeout !== 0;
+        clearTimeout(timeout);
+        timeout = 0;
+        return rest
+      };
+      var debounced = function () {
+        runFlag = false;
+        args = arguments;
+        context = this;
+        if (timeout === 0) {
+          if (optLeading === true) {
+            runFn();
+          }
+        } else {
+          clearTimeout(timeout);
+        }
+        timeout = setTimeout(endFn, wait);
+      };
+      debounced.cancel = cancelFn;
+      return debounced
+    }
+
+    var debounce_1 = debounce;
+
+    /**
+      * @desc 创建一个策略函数，当被重复调用函数的时候，至少每隔多少秒毫秒调用一次该函数
+      * @param { Function } callback 回调
+      * @param { Number } wait 多少秒毫
+      * @param { Object } options 参数{leading: 是否在之前执行, trailing: 是否在之后执行}
+      * @return { Function }
+      */
+     function throttle (callback, wait, options) {
+      var args, context;
+      var opts = options || {};
+      var runFlag = false;
+      var timeout = 0;
+      var optLeading = 'leading' in opts ? opts.leading : true;
+      var optTrailing = 'trailing' in opts ? opts.trailing : false;
+      var runFn = function () {
+        runFlag = true;
+        callback.apply(context, args);
+        timeout = setTimeout(endFn, wait);
+      };
+      var endFn = function () {
+        timeout = 0;
+        if (!runFlag && optTrailing === true) {
+          runFn();
+        }
+      };
+      var cancelFn = function () {
+        var rest = timeout !== 0;
+        clearTimeout(timeout);
+        runFlag = false;
+        timeout = 0;
+        return rest
+      };
+      var throttled = function () {
+        args = arguments;
+        context = this;
+        runFlag = false;
+        if (timeout === 0) {
+          if (optLeading === true) {
+            runFn();
+          } else if (optTrailing === true) {
+            timeout = setTimeout(endFn, wait);
+          }
+        }
+      };
+      throttled.cancel = cancelFn;
+      return throttled
+    }
+
+    var throttle_1 = throttle;
+
+    var _function = {
+      debounce: debounce_1,
+      throttle: throttle_1
+    };
+
     // array
     let arrayEqual$1 = array.arrayEqual;
     let arrayEach$1 = array.arrayEach;
@@ -742,6 +850,9 @@
     // random
     let randomNum$1 = random.randomNum;
     let randomColor$1 = random.randomColor;
+    // function
+    let debounce$1 = _function.debounce;
+    let throttle$1 = _function.throttle;
 
     let utils = {
     	// array
@@ -773,7 +884,10 @@
     	getRangeDate: getRangeDate$1,
     	//random
     	randomNum: randomNum$1,
-    	randomColor: randomColor$1
+    	randomColor: randomColor$1,
+    	//function
+    	debounce: debounce$1,
+    	throttle: throttle$1,
     };
 
     var unxUtils = utils;

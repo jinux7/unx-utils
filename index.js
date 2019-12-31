@@ -8,6 +8,7 @@ const dom = require('./src/dom/index.js')
 const string = require('./src/string/index.js')
 const date = require('./src/date/index.js')
 const random = require('./src/random/index.js')
+const fn = require('./src/function/index.js')
 
 // array
 let arrayEqual = array.arrayEqual;
@@ -39,6 +40,9 @@ let getRangeDate = date.getRangeDate;
 // random
 let randomNum = random.randomNum;
 let randomColor = random.randomColor;
+// function
+let debounce = fn.debounce;
+let throttle = fn.throttle;
 
 let utils = {
 	// array
@@ -70,7 +74,10 @@ let utils = {
 	getRangeDate,
 	//random
 	randomNum,
-	randomColor
+	randomColor,
+	//function
+	debounce,
+	throttle,
 };
 
 module.exports = utils;
