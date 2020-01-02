@@ -5,6 +5,7 @@
  * @param { Object } assign的源对象
  */
 const isPlainObject = require('./isPlainObject');
+
 const assign = function() {
 	var options, name, src, copy, copyIsArray, clone,
 		target = arguments[ 0 ] || {},

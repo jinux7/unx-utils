@@ -57,7 +57,6 @@
      * @return { Boolean }
      */
 
-
     var getProto = Object.getPrototypeOf;
     var hasOwn = class2type.hasOwnProperty;
     var fnToString = hasOwn.toString;
@@ -104,7 +103,6 @@
      * @param { Object } assign的目标对象
      * @param { Object } assign的源对象
      */
-    var isPlainObject$1 = require('./isPlainObject');
 
     var assign = function assign() {
       var options,
@@ -149,12 +147,12 @@
             } // Recurse if we're merging plain objects or arrays
 
 
-            if (deep && copy && (isPlainObject$1(copy) || (copyIsArray = Array.isArray(copy)))) {
+            if (deep && copy && (isPlainObject_1(copy) || (copyIsArray = Array.isArray(copy)))) {
               src = target[name]; // Ensure proper type for the source value
 
               if (copyIsArray && !Array.isArray(src)) {
                 clone = [];
-              } else if (!copyIsArray && !isPlainObject$1(src)) {
+              } else if (!copyIsArray && !isPlainObject_1(src)) {
                 clone = {};
               } else {
                 clone = src;
@@ -174,11 +172,7 @@
       return target;
     };
 
-    module.exports = assign;
-
-    var assign$1 = /*#__PURE__*/Object.freeze({
-        __proto__: null
-    });
+    var assign_1 = assign;
 
     /**
      * @desc 深拷贝，支持常见类型
@@ -221,11 +215,7 @@
       throw new Error("Unable to copy values! Its type isn't supported.");
     }
 
-    module.exports = deepClone;
-
-    var deepClone$1 = /*#__PURE__*/Object.freeze({
-        __proto__: null
-    });
+    var deepClone_1 = deepClone;
 
     /**
      * @desc   判断`obj`是否为空
@@ -237,17 +227,13 @@
       return !Object.keys(obj).length;
     }
 
-    module.exports = isEmptyObject;
-
-    var isEmptyObject$1 = /*#__PURE__*/Object.freeze({
-        __proto__: null
-    });
+    var isEmptyObject_1 = isEmptyObject;
 
     var object = {
       isPlainObject: isPlainObject_1,
-      assign: assign$1,
-      deepClone: deepClone$1,
-      isEmptyObject: isEmptyObject$1
+      assign: assign_1,
+      deepClone: deepClone_1,
+      isEmptyObject: isEmptyObject_1
     };
 
     /**
@@ -315,7 +301,6 @@
      * @param {String} path Cookie的使用路径
      * @param {Boolean} secure 该Cookie是否仅被使用安全协议传输(https)
      */
-
 
     var removeCookie = function removeCookie(name, domain, path, secure) {
       setCookie_1(name, "", Date(0), domain, path, secure);
@@ -394,19 +379,16 @@
       object2UrlQuery: object2UrlQuery_1
     };
 
-    // 此模块借鉴jquery
-
     /**
      * @desc 返回所传参数的类型
      * @param { any }
      * @return { String } 具体的类型
      */
-    var class2type$1 = require('../var/class2type');
 
-    var toString$1 = class2type$1.toString;
+    var toString$1 = class2type.toString;
     var typeArr = "Boolean Number String Function Array Date RegExp Object Error Symbol".split(" ");
     typeArr.forEach(function (name) {
-      class2type$1["[object " + name + "]"] = name.toLowerCase();
+      class2type["[object " + name + "]"] = name.toLowerCase();
     });
 
     function toType(obj) {
@@ -414,33 +396,25 @@
         return obj + "";
       }
 
-      return _typeof(obj) === "object" ? class2type$1[toString$1.call(obj)] || "object" : _typeof(obj);
+      return _typeof(obj) === "object" ? class2type[toString$1.call(obj)] || "object" : _typeof(obj);
     }
 
-    module.exports = toType;
-
-    var toType$1 = /*#__PURE__*/Object.freeze({
-        __proto__: null
-    });
+    var toType_1 = toType;
 
     var type = {
-      toType: toType$1
+      toType: toType_1
     };
+
+    var strUndefined = {};
 
     /**
      * @desc 获取浏览器的内核属性等信息
      * @return {Object} 例：{"isNode":false,"isMobile":true,"isPC":false,"isDoc":true,"-webkit":true,"-khtml":false,"-moz":false,"-ms":false,"-o":false,"edge":false,"firefox":false,"msie":false,"safari":true,"isLocalStorage":true,"isSessionStorage":true}
      */
-    var staticStrUndefined = require('../var/strUndefined');
 
-    var staticDocument = (typeof document === "undefined" ? "undefined" : _typeof(document)) === staticStrUndefined ? 0 : document;
-    var staticWindow = (typeof window === "undefined" ? "undefined" : _typeof(window)) === staticStrUndefined ? 0 : window;
-
-    var assign$2 = require('../object/assign');
-
-    var arrayEach$1 = require('../array/arrayEach');
+    var staticDocument = (typeof document === "undefined" ? "undefined" : _typeof(document)) === strUndefined ? 0 : document;
+    var staticWindow = (typeof window === "undefined" ? "undefined" : _typeof(window)) === strUndefined ? 0 : window;
     /* eslint-disable valid-typeof */
-
 
     function isBrowseStorage(storage) {
       try {
@@ -472,7 +446,7 @@
         isDoc: !!staticDocument
       };
 
-      if (!staticWindow && (typeof process === "undefined" ? "undefined" : _typeof(process)) !== staticStrUndefined) {
+      if (!staticWindow && (typeof process === "undefined" ? "undefined" : _typeof(process)) !== strUndefined) {
         result.isNode = true;
       } else {
         isEdge = isBrowseType('Edge');
@@ -481,12 +455,12 @@
 
         if (result.isDoc) {
           $body = staticDocument.body || staticDocument.documentElement;
-          arrayEach$1(['webkit', 'khtml', 'moz', 'ms', 'o'], function (core) {
+          arrayEach_1(['webkit', 'khtml', 'moz', 'ms', 'o'], function (core) {
             result['-' + core] = !!$body[core + 'MatchesSelector'];
           });
         }
 
-        assign$2(result, {
+        assign_1(result, {
           edge: isEdge,
           firefox: isBrowseType('Firefox'),
           msie: !isEdge && result['-ms'],
@@ -501,14 +475,10 @@
       return result;
     }
 
-    module.exports = browser;
-
-    var browser$1 = /*#__PURE__*/Object.freeze({
-        __proto__: null
-    });
+    var browser_1 = browser;
 
     var bom = {
-      browser: browser$1
+      browser: browser_1
     };
 
     var document$1 = window.document;
@@ -518,7 +488,6 @@
      * @param { String } js语句的字符串
      * @return { void }
      */
-
 
     var preservedScriptAttributes = {
       type: true,
@@ -649,12 +618,12 @@
       if (args.length === 0) formatStr = '-';
 
       if (args.length === 1) {
-        if (toType$1(date) === 'string') {
+        if (toType_1(date) === 'string') {
           formatStr = date;
           date = new Date();
-        } else if (toType$1(date) == 'date') {
+        } else if (toType_1(date) == 'date') {
           formatStr = '-';
-        } else if (toType$1(date) === 'boolean') {
+        } else if (toType_1(date) === 'boolean') {
           date = new Date();
           formatStr = '-';
           showTime = argDate;
@@ -664,10 +633,10 @@
       }
 
       if (args.length === 2) {
-        if (toType$1(date) === 'date' && toType$1(formatStr) === 'string') ; else if (toType$1(date) === 'date' && toType$1(formatStr) === 'boolean') {
+        if (toType_1(date) === 'date' && toType_1(formatStr) === 'string') ; else if (toType_1(date) === 'date' && toType_1(formatStr) === 'boolean') {
           formatStr = '-';
           showTime = argFormatStr;
-        } else if (toType$1(date) === 'string' && toType$1(formatStr) === 'boolean') {
+        } else if (toType_1(date) === 'string' && toType_1(formatStr) === 'boolean') {
           date = new Date();
           formatStr = argDate;
           showTime = argFormatStr;
@@ -676,7 +645,7 @@
         }
       }
 
-      if (args.length >= 3 && (toType$1(date) !== 'date' || toType$1(formatStr) != 'string' || toType$1(showTime) != 'boolean')) {
+      if (args.length >= 3 && (toType_1(date) !== 'date' || toType_1(formatStr) != 'string' || toType_1(showTime) != 'boolean')) {
         return 'arguments error';
       }
 
@@ -916,16 +885,13 @@
       throttle: throttle_1
     };
 
-    // array
-
-
     var arrayEqual$1 = array.arrayEqual;
-    var arrayEach$2 = array.arrayEach; // object
+    var arrayEach$1 = array.arrayEach; // object
 
-    var isPlainObject$2 = object.isPlainObject;
-    var assign$3 = object.assign;
-    var deepClone$2 = object.deepClone;
-    var isEmptyObject$2 = object.isEmptyObject; // cookie
+    var isPlainObject$1 = object.isPlainObject;
+    var assign$1 = object.assign;
+    var deepClone$1 = object.deepClone;
+    var isEmptyObject$1 = object.isEmptyObject; // cookie
 
     var setCookie$1 = cookie.setCookie;
     var getCookie$1 = cookie.getCookie;
@@ -934,9 +900,9 @@
     var urlQuery2Object$1 = url.urlQuery2Object;
     var object2UrlQuery$1 = url.object2UrlQuery; // type
 
-    var toType$2 = type.toType; // bom
+    var toType$1 = type.toType; // bom
 
-    var browser$2 = bom.browser; // dom
+    var browser$1 = bom.browser; // dom
 
     var domEval$1 = dom.domEval;
     var trigger$1 = dom.trigger; // string
@@ -954,12 +920,12 @@
     var utils = {
       // array
       arrayEqual: arrayEqual$1,
-      arrayEach: arrayEach$2,
+      arrayEach: arrayEach$1,
       // object
-      isPlainObject: isPlainObject$2,
-      assign: assign$3,
-      deepClone: deepClone$2,
-      isEmptyObject: isEmptyObject$2,
+      isPlainObject: isPlainObject$1,
+      assign: assign$1,
+      deepClone: deepClone$1,
+      isEmptyObject: isEmptyObject$1,
       // cookie
       setCookie: setCookie$1,
       getCookie: getCookie$1,
@@ -968,9 +934,9 @@
       urlQuery2Object: urlQuery2Object$1,
       object2UrlQuery: object2UrlQuery$1,
       // type
-      toType: toType$2,
+      toType: toType$1,
       // bom
-      browser: browser$2,
+      browser: browser$1,
       // dom
       domEval: domEval$1,
       trigger: trigger$1,
