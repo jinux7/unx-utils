@@ -46,6 +46,11 @@ javascript基础工具集合
 |  ----  | ----  | ----  |
 | randomNum  | 获取区间范围内的随机数 | randomNum(2,10,true)<br/>randomNum(2,10,false) |
 | randomColor  | 获取一个随机的颜色 | randomColor() |
+### function
+|  工具函数名   | 功能  | 用法 |
+|  ----  | ----  | ----  |
+| debounce  | 防抖，不会连续的触发，超过设定的时间时才会触发 | debounce(function() {}, 500) |
+| throttle  | 节流，在设定的时间范围连续调用执行 | throttle(function() {}, 500) |
 ## 关于测试
 本项目的工具函数代码都会做单元测试，覆盖率争取达到95%以上。 
 
