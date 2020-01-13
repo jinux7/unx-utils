@@ -29,6 +29,7 @@ let object2UrlQuery = url.object2UrlQuery;
 let toType = type.toType;
 // bom
 let browser = bom.browser;
+let ajax = bom.ajax;
 // dom
 let domEval = dom.domEval;
 let trigger = dom.trigger;
@@ -64,6 +65,7 @@ let utils = {
 	toType,
 	// bom
 	browser,
+	ajax,
 	// dom
 	domEval,
 	trigger,
