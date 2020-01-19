@@ -27,11 +27,13 @@ javascript基础工具集合
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
 | browser  | 获取浏览器的基本信息 | browser() |
+| ajax  | ajax请求函数 | [见这里](https://github.com/jinux7/jinux-ajax/tree/master/public/test) |
 ### dom
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
 | domEval  | 动态的执行script代码 | domEval('alert(555)') |
 | trigger  | 手动触发事件 | trigger(Element, 'click') |
+| getStyle  | 获取元素的样式值 | getStyle(document.body, 'fontSize') |
 ### string
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
@@ -51,6 +53,8 @@ javascript基础工具集合
 |  ----  | ----  | ----  |
 | debounce  | 防抖，不会连续的触发，超过设定的时间时才会触发 | debounce(function() {}, 500) |
 | throttle  | 节流，在设定的时间范围连续调用执行 | throttle(function() {}, 500) |
+| curry  | 包装成柯里化函数 | curry(fn)(arg1)(arg2)(arg3) |
+| compose  | 以柯里化函数为参数，从右向左管道式的执行 | compose(curryFn1,curryFn2,curryFn3)('fn3arg') |
 ## 关于测试
 本项目的工具函数代码都会做单元测试，覆盖率争取达到95%以上。 
 

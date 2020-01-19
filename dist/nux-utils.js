@@ -777,9 +777,30 @@
 
     var trigger_1 = trigger;
 
+    /**
+     * @desc 获取元素的样式
+     * @param { Element } element 
+     * @param { String } attr
+     * @return { String } 样式的值 
+     */
+    function getStyle(element, attr) {
+      var computed;
+
+      if (element.currentStyle) {
+        computed = element.currentStyle;
+      } else {
+        computed = window.getComputedStyle(element, false);
+      }
+
+      return computed.getPropertyValue(attr) || computed[attr];
+    }
+
+    var getStyle_1 = getStyle;
+
     var dom = {
       domEval: domEval,
-      trigger: trigger_1
+      trigger: trigger_1,
+      getStyle: getStyle_1
     };
 
     /**
@@ -1092,9 +1113,65 @@
 
     var throttle_1 = throttle;
 
+    /**
+     * @desc 柯里化函数
+     * @param { Function } 一个函数
+     * @return { Function } 一个函数
+     * @example
+     * const pipe = (a,b,c) => a+b+c;
+     * const rings = curry(pipe);
+     * const ring_a = rings( 'a' );
+     * const ring_ab = rings( 'a' , 'b' ); // 和 rings( 'a' )( 'b' ) 等价，缺少最后的管环
+     * const ring_abc = rings( 'a' , 'b' , 'c' ); // 和 ring_ab( 'c' ) 等价，完成有输出 'abc'
+     */
+    var curry = function curry(f, length) {
+      length = length || f.length;
+      return function () {
+        for (var _len = arguments.length, usedArgs = new Array(_len), _key = 0; _key < _len; _key++) {
+          usedArgs[_key] = arguments[_key];
+        }
+
+        return length - usedArgs.length > 0 ? curry(function () {
+          for (var _len2 = arguments.length, restArgs = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+            restArgs[_key2] = arguments[_key2];
+          }
+
+          return f.call.apply(f, [null].concat(usedArgs, restArgs));
+        }, length - usedArgs.length) : f.apply(null, usedArgs);
+      };
+    };
+
+    var curry_1 = curry;
+
+    /**
+     * @desc 柯里化函数的组合函数
+     * @param { Function } 可以传入多个curry处理的函数
+     * @return { Function } 一个函数
+     * @example
+     * const pipe1 = curry( (x,y)  => x + y)
+     * const pipe2 = x => x * x
+     * const pipes = compose( pipe2 , pipe1(2) )
+     * pipes( 1 ) // 9
+     */
+    var compose = function compose() {
+      for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
+        functions[_key] = arguments[_key];
+      }
+
+      return function (flowIn) {
+        return functions.reduceRight(function (acc, f) {
+          return f(acc);
+        }, flowIn);
+      };
+    };
+
+    var compose_1 = compose;
+
     var _function = {
       debounce: debounce_1,
-      throttle: throttle_1
+      throttle: throttle_1,
+      curry: curry_1,
+      compose: compose_1
     };
 
     var arrayEqual$1 = array.arrayEqual;
@@ -1118,7 +1195,8 @@
     var ajax$1 = bom.ajax; // dom
 
     var domEval$1 = dom.domEval;
-    var trigger$1 = dom.trigger; // string
+    var trigger$1 = dom.trigger;
+    var getStyle$1 = dom.getStyle; // string
 
     var price2chinese$1 = string.price2chinese; // date
 
@@ -1130,6 +1208,8 @@
 
     var debounce$1 = _function.debounce;
     var throttle$1 = _function.throttle;
+    var curry$1 = _function.curry;
+    var compose$1 = _function.compose;
     var utils = {
       // array
       arrayEqual: arrayEqual$1,
@@ -1154,6 +1234,7 @@
       // dom
       domEval: domEval$1,
       trigger: trigger$1,
+      getStyle: getStyle$1,
       // string
       price2chinese: price2chinese$1,
       // date
@@ -1164,7 +1245,9 @@
       randomColor: randomColor$1,
       //function
       debounce: debounce$1,
-      throttle: throttle$1
+      throttle: throttle$1,
+      curry: curry$1,
+      compose: compose$1
     };
     var unxUtils = utils;
 

@@ -33,6 +33,7 @@ let ajax = bom.ajax;
 // dom
 let domEval = dom.domEval;
 let trigger = dom.trigger;
+let getStyle = dom.getStyle;
 // string
 let price2chinese = string.price2chinese;
 // date
@@ -44,6 +45,8 @@ let randomColor = random.randomColor;
 // function
 let debounce = fn.debounce;
 let throttle = fn.throttle;
+let curry = fn.curry;
+let compose = fn.compose;
 
 let utils = {
 	// array
@@ -69,6 +72,7 @@ let utils = {
 	// dom
 	domEval,
 	trigger,
+	getStyle,
 	// string
 	price2chinese,
 	// date
@@ -80,6 +84,8 @@ let utils = {
 	//function
 	debounce,
 	throttle,
+	curry,
+	compose,
 };
 
 module.exports = utils;
