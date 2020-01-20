@@ -797,10 +797,42 @@
 
     var getStyle_1 = getStyle;
 
+    /**
+     * @desc 对html代码片段字符串进行解析操作
+     * @param { String } markup
+     * @return { Element } 元素节点对象 
+     */
+    function parseHTML(markup) {
+      if (markup.toLowerCase().trim().indexOf('<!doctype') === 0) {
+        var doc = document.implementation.createHTMLDocument("");
+        doc.documentElement.innerHTML = markup;
+        return doc;
+      } else if ('content' in document.createElement('template')) {
+        // Template tag exists!
+        var el = document.createElement('template');
+        el.innerHTML = markup;
+        return el.content;
+      } else {
+        // Template tag doesn't exist!
+        var docfrag = document.createDocumentFragment();
+        var el = document.createElement('body');
+        el.innerHTML = markup;
+
+        for (i = 0; 0 < el.childNodes.length;) {
+          docfrag.appendChild(el.childNodes[i]);
+        }
+
+        return docfrag;
+      }
+    }
+
+    var parseHtml = parseHTML;
+
     var dom = {
       domEval: domEval,
       trigger: trigger_1,
-      getStyle: getStyle_1
+      getStyle: getStyle_1,
+      parseHtml: parseHtml
     };
 
     /**
@@ -1196,7 +1228,8 @@
 
     var domEval$1 = dom.domEval;
     var trigger$1 = dom.trigger;
-    var getStyle$1 = dom.getStyle; // string
+    var getStyle$1 = dom.getStyle;
+    var parseHtml$1 = dom.parseHtml; // string
 
     var price2chinese$1 = string.price2chinese; // date
 
@@ -1235,6 +1268,7 @@
       domEval: domEval$1,
       trigger: trigger$1,
       getStyle: getStyle$1,
+      parseHtml: parseHtml$1,
       // string
       price2chinese: price2chinese$1,
       // date

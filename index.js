@@ -34,6 +34,7 @@ let ajax = bom.ajax;
 let domEval = dom.domEval;
 let trigger = dom.trigger;
 let getStyle = dom.getStyle;
+let parseHtml = dom.parseHtml;
 // string
 let price2chinese = string.price2chinese;
 // date
@@ -73,6 +74,7 @@ let utils = {
 	domEval,
 	trigger,
 	getStyle,
+	parseHtml,
 	// string
 	price2chinese,
 	// date

@@ -11,11 +11,18 @@ describe('#dom.js', () => {
     //     });
     // });
     describe('#getStyle()', () => {
-        it("getStyle() should return selected Element's ", () => {
+        it("getStyle() should return selected Element's css style", () => {
             var color = "blue";
             document.body.style.color = color;
             var strStyle = domModule.getStyle(document.body, 'color');
             assert.strictEqual(strStyle, color);
+        });
+    });
+    describe('#parseHtml()', () => {
+        it("parseHtml() should parse html string,return Element Object", () => {
+            var htmlStr = '<div><span>hello parseHtml</span></div>'
+            var nSpan = domModule.parseHtml(htmlStr).querySelector('span');
+            assert.strictEqual(nSpan.innerHTML, 'hello parseHtml');
         });
     });
 });
