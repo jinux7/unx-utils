@@ -48,6 +48,7 @@ let debounce = fn.debounce;
 let throttle = fn.throttle;
 let curry = fn.curry;
 let compose = fn.compose;
+let interval = fn.interval;
 
 let utils = {
 	// array
@@ -88,6 +89,7 @@ let utils = {
 	throttle,
 	curry,
 	compose,
+	interval
 };
 
 module.exports = utils;

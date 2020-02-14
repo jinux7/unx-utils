@@ -10,7 +10,8 @@ const config = {
 		{
 			name: 'nuxUtils',
 			file: './dist/nux-utils.js',
-			format: 'umd'
+			format: 'umd' // commonjs ,amd,全局使用
+			// format: 'es' // import用
 		},
 		plugins: [
 			resolve(), // so Rollup can find `ms`
@@ -22,9 +23,11 @@ const config = {
 	};
 
 	if (env === 'production') {
-		config.output.file = './dist/nux-utils.min.js'
+		config.output.file = './dist/nux-utils.min.js';
 		config.plugins.push(
-			uglify()
+			uglify({
+				mangle: false // 不混淆一些代码的变量名
+			})
 		)
 	}
 	

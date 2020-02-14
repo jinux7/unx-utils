@@ -55,6 +55,7 @@ javascript基础工具集合
 | throttle  | 节流，在设定的时间范围连续调用执行 | throttle(function() {}, 500) |
 | curry  | 包装成柯里化函数 | curry(fn)(arg1)(arg2)(arg3) |
 | compose  | 以柯里化函数为参数，从右向左管道式的执行 | compose(curryFn1,curryFn2,curryFn3)('fn3arg') |
+| interval  | 循环定时器，类似与原生setInterval | var demo = interval();<br/>demo(function() {console.log(555);}, 1000);<br/>demo.stop(); |
 ## 关于测试
 本项目的工具函数代码都会做单元测试，覆盖率争取达到95%以上。 
 
