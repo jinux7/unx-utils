@@ -34,6 +34,8 @@ javascript基础工具集合
 | domEval  | 动态的执行script代码 | domEval('alert(555)') |
 | trigger  | 手动触发事件 | trigger(Element, 'click') |
 | getStyle  | 获取元素的样式值 | getStyle(document.body, 'fontSize') |
+| getTopLeftInBody  | 获取元素距离body左上角的距离 | getTopLeftInBody(document.getElementById('idName')) |
+| parseHTML  | 根据html字符串片段解析dom对象 | parseHTML('<div>hello world</div>') |
 ### string
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |

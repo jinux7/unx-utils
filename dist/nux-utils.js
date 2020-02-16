@@ -828,11 +828,36 @@
 
     var parseHtml = parseHTML;
 
+    /**
+     * @desc 获取元素在页面中距离body元素左上角点的距离
+     * @param { Element } dom中的元素节点
+     * @return { Object } obj.left obj.top
+     */
+    function getTopLeftInBody(element) {
+      var actualTop = element.offsetTop,
+          actualLeft = element.offsetLeft;
+      var current = element.offsetParent;
+
+      while (current !== null) {
+        actualTop += current.offsetTop;
+        actualLeft += current.offsetLeft;
+        current = current.offsetParent;
+      }
+
+      return {
+        top: actualTop,
+        left: actualLeft
+      };
+    }
+
+    var getTopLeftInBody_1 = getTopLeftInBody;
+
     var dom = {
       domEval: domEval,
       trigger: trigger_1,
       getStyle: getStyle_1,
-      parseHtml: parseHtml
+      parseHtml: parseHtml,
+      getTopLeftInBody: getTopLeftInBody_1
     };
 
     /**
@@ -1200,7 +1225,7 @@
     var compose_1 = compose;
 
     /**
-     * @desc 定时器循环的功能函数
+     * @desc 定时器循环的功能函数(未做单元测试)
      * @param { Function } 定时器的回掉函数，下面返回的函数的参数
      * @param { Number } 定时器的延迟时间，下面返回的函数的参数
      * @return { Function } 创建的循环执行定时器函数
@@ -1273,7 +1298,8 @@
     var domEval$1 = dom.domEval;
     var trigger$1 = dom.trigger;
     var getStyle$1 = dom.getStyle;
-    var parseHtml$1 = dom.parseHtml; // string
+    var parseHtml$1 = dom.parseHtml;
+    var getTopLeftInBody$1 = dom.getTopLeftInBody; // string
 
     var price2chinese$1 = string.price2chinese; // date
 
@@ -1327,7 +1353,8 @@
       throttle: throttle$1,
       curry: curry$1,
       compose: compose$1,
-      interval: interval$1
+      interval: interval$1,
+      getTopLeftInBody: getTopLeftInBody$1
     };
     var unxUtils = utils;
 

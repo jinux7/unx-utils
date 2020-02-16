@@ -35,6 +35,7 @@ let domEval = dom.domEval;
 let trigger = dom.trigger;
 let getStyle = dom.getStyle;
 let parseHtml = dom.parseHtml;
+let getTopLeftInBody = dom.getTopLeftInBody;
 // string
 let price2chinese = string.price2chinese;
 // date
@@ -89,7 +90,8 @@ let utils = {
 	throttle,
 	curry,
 	compose,
-	interval
+	interval,
+	getTopLeftInBody
 };
 
 module.exports = utils;
