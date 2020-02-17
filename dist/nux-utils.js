@@ -44,9 +44,29 @@
 
     var arrayEach_1 = arrayEach;
 
+    /**
+     * @desc flat的相反函数，将一维数组转为二维数组,[1,2,3,4,5,6]=>[[1,2,3],[4,5,6]]
+     * @param { Array } 处理的数组
+     * @param { Number } 二维数组里单个元素数组里的个数
+     * return { Array } 处理成的二维数组 
+     */
+    function arrFlat2complex(arr, num) {
+      var newArr = [],
+          splitNum = Math.ceil(arr.length / num);
+
+      for (var i = 0; i < splitNum; i++) {
+        newArr.push(arr.slice(i * num, i * num + num));
+      }
+
+      return newArr;
+    }
+
+    var arrFlat2complex_1 = arrFlat2complex;
+
     var array = {
       arrayEqual: arrayEqual_1,
-      arrayEach: arrayEach_1
+      arrayEach: arrayEach_1,
+      arrFlat2complex: arrFlat2complex_1
     };
 
     var class2type = {};
@@ -829,7 +849,7 @@
     var parseHtml = parseHTML;
 
     /**
-     * @desc 获取元素在页面中距离body元素左上角点的距离
+     * @desc 获取元素在页面中距离body元素左上角点的距离(未做单元测试)
      * @param { Element } dom中的元素节点
      * @return { Object } obj.left obj.top
      */
@@ -1276,7 +1296,8 @@
     };
 
     var arrayEqual$1 = array.arrayEqual;
-    var arrayEach$1 = array.arrayEach; // object
+    var arrayEach$1 = array.arrayEach;
+    var arrFlat2complex$1 = array.arrFlat2complex; // object
 
     var isPlainObject$1 = object.isPlainObject;
     var assign$1 = object.assign;
@@ -1318,6 +1339,7 @@
       // array
       arrayEqual: arrayEqual$1,
       arrayEach: arrayEach$1,
+      arrFlat2complex: arrFlat2complex$1,
       // object
       isPlainObject: isPlainObject$1,
       assign: assign$1,

@@ -13,6 +13,7 @@ const fn = require('./src/function/index.js')
 // array
 let arrayEqual = array.arrayEqual;
 let arrayEach = array.arrayEach;
+let arrFlat2complex = array.arrFlat2complex;
 // object
 let isPlainObject = object.isPlainObject;
 let assign = object.assign;
@@ -55,6 +56,7 @@ let utils = {
 	// array
 	arrayEqual,
 	arrayEach,
+	arrFlat2complex,
 	// object
 	isPlainObject,
 	assign,
