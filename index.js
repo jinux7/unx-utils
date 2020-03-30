@@ -37,6 +37,9 @@ let trigger = dom.trigger;
 let getStyle = dom.getStyle;
 let parseHtml = dom.parseHtml;
 let getTopLeftInBody = dom.getTopLeftInBody;
+let hasClassName = dom.hasClassName;
+let addClassName = dom.addClassName;
+let removeClassName = dom.removeClassName;
 // string
 let price2chinese = string.price2chinese;
 // date
@@ -79,6 +82,9 @@ let utils = {
 	trigger,
 	getStyle,
 	parseHtml,
+	hasClassName,
+	addClassName,
+  removeClassName,
 	// string
 	price2chinese,
 	// date

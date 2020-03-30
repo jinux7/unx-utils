@@ -872,12 +872,71 @@
 
     var getTopLeftInBody_1 = getTopLeftInBody;
 
+    /**
+     * @desc 判断元素是否包含类名
+     * @param { Element } element 
+     * @param { String } argClassName
+     * @return { Boolean } true or false 
+     */
+    function hasClassName(element, argClassName) {
+      var arrClassName = element.className.split(' ');
+      var flag = false;
+
+      for (var i = 0; i < arrClassName.length; i++) {
+        if (arrClassName[i] === argClassName) {
+          flag = true;
+          break;
+        }
+      }
+
+      return flag;
+    }
+
+    var hasClassName_1 = hasClassName;
+
+    /**
+     * @desc 给一个元素添加类名
+     * @param { Element } element 
+     * @param { String } argClassName
+     * @return { undefined } undefined 
+     */
+    function addClassName(element, argClassName) {
+      element.className += ' ' + argClassName;
+    }
+
+    var addClassName_1 = addClassName;
+
+    /**
+     * @desc 删除元素的类名
+     * @param { Element } element 
+     * @param { String } argClassName
+     * @return { String } 删除成功后此元素的类名 
+     */
+    function removeClassName(element, argClassName) {
+      var arrClassName = element.className.split(' ');
+      var arr = [];
+
+      for (var i = 0; i < arrClassName.length; i++) {
+        if (arrClassName[i] !== argClassName) {
+          arr.push(arrClassName[i]);
+        }
+      }
+
+      element.className = arr.join(' ');
+      return element.className;
+    }
+
+    var removeClassName_1 = removeClassName;
+
     var dom = {
       domEval: domEval,
       trigger: trigger_1,
       getStyle: getStyle_1,
       parseHtml: parseHtml,
-      getTopLeftInBody: getTopLeftInBody_1
+      getTopLeftInBody: getTopLeftInBody_1,
+      hasClassName: hasClassName_1,
+      addClassName: addClassName_1,
+      removeClassName: removeClassName_1
     };
 
     /**
@@ -1320,7 +1379,10 @@
     var trigger$1 = dom.trigger;
     var getStyle$1 = dom.getStyle;
     var parseHtml$1 = dom.parseHtml;
-    var getTopLeftInBody$1 = dom.getTopLeftInBody; // string
+    var getTopLeftInBody$1 = dom.getTopLeftInBody;
+    var hasClassName$1 = dom.hasClassName;
+    var addClassName$1 = dom.addClassName;
+    var removeClassName$1 = dom.removeClassName; // string
 
     var price2chinese$1 = string.price2chinese; // date
 
@@ -1362,6 +1424,9 @@
       trigger: trigger$1,
       getStyle: getStyle$1,
       parseHtml: parseHtml$1,
+      hasClassName: hasClassName$1,
+      addClassName: addClassName$1,
+      removeClassName: removeClassName$1,
       // string
       price2chinese: price2chinese$1,
       // date

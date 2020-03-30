@@ -36,6 +36,9 @@ javascript基础工具集合
 | getStyle  | 获取元素的样式值 | getStyle(document.body, 'fontSize') |
 | getTopLeftInBody  | 获取元素距离body左上角的距离 | getTopLeftInBody(document.getElementById('idName')) |
 | parseHTML  | 根据html字符串片段解析dom对象 | parseHTML('<div>hello world</div>') |
+| hasClassName  | 判断元素是否包含此类名 | hasClassName('content') |
+| addClassName  | 给元素添加一个类名 | addClassName('content') |
+| removeClassName  | 删除元素上的一个类名 | removeClassName('content') |
 ### string
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
