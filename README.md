@@ -39,6 +39,7 @@ javascript基础工具集合
 | hasClassName  | 判断元素是否包含此类名 | hasClassName('content') |
 | addClassName  | 给元素添加一个类名 | addClassName('content') |
 | removeClassName  | 删除元素上的一个类名 | removeClassName('content') |
+| isParentNode  | 判断两个元素节点是否为父子关系,childNode子节点，parentNode父辈节点，flag区分是父节点还是父辈节点 | isParentNode(childNode, parentNode, flag) |
 ### string
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |

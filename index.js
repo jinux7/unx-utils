@@ -40,6 +40,7 @@ let getTopLeftInBody = dom.getTopLeftInBody;
 let hasClassName = dom.hasClassName;
 let addClassName = dom.addClassName;
 let removeClassName = dom.removeClassName;
+let isParentNode = dom.isParentNode;
 // string
 let price2chinese = string.price2chinese;
 // date
@@ -84,7 +85,8 @@ let utils = {
 	parseHtml,
 	hasClassName,
 	addClassName,
-  removeClassName,
+	removeClassName,
+	isParentNode,
 	// string
 	price2chinese,
 	// date

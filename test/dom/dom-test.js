@@ -39,4 +39,16 @@ describe('#dom.js', () => {
             assert.strictEqual(document.body.className, '');
         });
     });
+    describe('#isParentNode()', () => {
+        it("isParentNode() should determine whether it is a parent node", () => {
+            var htmlStr = '<div id="wrapOuter"><div id="wrap"><div id="wrapInner"></div></div></div>'
+            var nDiv = domModule.parseHtml(htmlStr);
+            document.body.appendChild(nDiv);
+            var nWrapOuter = document.querySelector('#wrapOuter');
+            var nWrap = document.querySelector('#wrap');
+            var nWrapInner = document.querySelector('#wrapInner');
+            // assert.strictEqual(domModule.isParentNode(nWrapInner, nWrap, true), true);
+            assert.strictEqual(domModule.isParentNode(nWrapInner, nWrapOuter, true), false);
+        });
+    });
 });

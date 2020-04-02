@@ -6,6 +6,7 @@ const getTopLeftInBody = require('./getTopLeftInBody.js');
 const hasClassName = require('./hasClassName.js');
 const addClassName = require('./addClassName.js');
 const removeClassName = require('./removeClassName.js');
+const isParentNode = require('./isParentNode.js');
 
 module.exports = {
   domEval,
@@ -15,5 +16,6 @@ module.exports = {
   getTopLeftInBody,
   hasClassName,
   addClassName,
-  removeClassName
+  removeClassName,
+  isParentNode
 }

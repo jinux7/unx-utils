@@ -928,6 +928,30 @@
 
     var removeClassName_1 = removeClassName;
 
+    /**
+     * @desc 判断是否为父节点或者父辈节点
+     * @param { Element } 子节点 childNode 
+     * @param { Element } 父节点 parentNode 
+     * @param { Boolean } true判断父辈节点，false判断父节点 
+     * @return { Boolean } 是或否 
+     */
+    function isParentNode(childNode, parentNode, flag) {
+      if (!(childNode instanceof window.Element) || !(parentNode instanceof window.Element)) throw new Error('传入的参数不是dom对象');
+
+      if (flag) {
+        return childNode.parentNode === parentNode;
+      } else {
+        while (childNode != undefined && childNode != null && childNode.tagName.toUpperCase() != 'BODY') {
+          if (childNode === parentNode) return true;
+          childNode = childNode.parentNode;
+        }
+
+        return false;
+      }
+    }
+
+    var isParentNode_1 = isParentNode;
+
     var dom = {
       domEval: domEval,
       trigger: trigger_1,
@@ -936,7 +960,8 @@
       getTopLeftInBody: getTopLeftInBody_1,
       hasClassName: hasClassName_1,
       addClassName: addClassName_1,
-      removeClassName: removeClassName_1
+      removeClassName: removeClassName_1,
+      isParentNode: isParentNode_1
     };
 
     /**
@@ -1382,7 +1407,8 @@
     var getTopLeftInBody$1 = dom.getTopLeftInBody;
     var hasClassName$1 = dom.hasClassName;
     var addClassName$1 = dom.addClassName;
-    var removeClassName$1 = dom.removeClassName; // string
+    var removeClassName$1 = dom.removeClassName;
+    var isParentNode$1 = dom.isParentNode; // string
 
     var price2chinese$1 = string.price2chinese; // date
 
@@ -1427,6 +1453,7 @@
       hasClassName: hasClassName$1,
       addClassName: addClassName$1,
       removeClassName: removeClassName$1,
+      isParentNode: isParentNode$1,
       // string
       price2chinese: price2chinese$1,
       // date
