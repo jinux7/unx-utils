@@ -12,7 +12,8 @@ javascript基础工具集合
 |  ----  | ----  | ----  |
 | isPlainObject  | 判断是否为纯粹的对象 | isPlainObject({name: 'mike'}) |
 | assign  | assign函数 | assign(false, targetObj, obj1, obj2 [,obj3...]) |
-| deepClone  | 深度克隆对象 | deepClone({name: 'mike', like: ['ball1','ball2','ball3']}) |
+| deepClone | 深度克隆对象 | deepClone({name: 'mike', like: ['ball1','ball2','ball3']}) |
+| isEmptyObject | 判断参数是否为空 | isEmptyObject({}) |
 ### cookie
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
@@ -24,6 +25,10 @@ javascript基础工具集合
 |  ----  | ----  | ----  |
 | urlQuery2Object  | 解析url的参数以对象的形式返回 | urlQuery2Object(url) |
 | object2UrlQuery  | 将一个对象转成name=mike&age=6这种url参数字符串 | object2UrlQuery(obj) |
+### type
+|  工具函数名   | 功能  | 用法 |
+|  ----  | ----  | ----  |
+| toType | 返回所传参数的类型 | toType('type') |
 ### bom
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
@@ -37,9 +42,9 @@ javascript基础工具集合
 | getStyle  | 获取元素的样式值 | getStyle(document.body, 'fontSize') |
 | getTopLeftInBody  | 获取元素距离body左上角的距离 | getTopLeftInBody(document.getElementById('idName')) |
 | parseHTML  | 根据html字符串片段解析dom对象 | parseHTML('<div>hello world</div>') |
-| hasClassName  | 判断元素是否包含此类名 | hasClassName('content') |
-| addClassName  | 给元素添加一个类名 | addClassName('content') |
-| removeClassName  | 删除元素上的一个类名 | removeClassName('content') |
+| hasClassName  | 判断元素是否包含此类名 | hasClassName(ele, 'content') |
+| addClassName  | 给元素添加一个类名 | addClassName(ele, 'content') |
+| removeClassName  | 删除元素上的一个类名 | removeClassName(ele, 'content') |
 | isParentNode  | 判断两个元素节点是否为父子关系,childNode子节点，parentNode父辈节点，flag区分是父节点还是父辈节点 | isParentNode(childNode, parentNode, flag) |
 ### string
 |  工具函数名   | 功能  | 用法 |
