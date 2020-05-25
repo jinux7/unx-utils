@@ -42,4 +42,8 @@ export function debounce(callback: ()=> void, timeOut: number): void;
 export function throttle(callback: ()=> void, timeOut: number): void;
 // export function curry = fn.curry; // 暂时不知道如何声明
 // export function compose = fn.compose; // 暂时不知道如何声明
-// export function interval = fn.interval; // 暂时不知道如何声明
+// inter既是一个函数对象，也含有stop属性
+export function interval(): {
+  (fn: ()=> void, timeOut: number): void; // 声明了interval函数本身
+  stop(): void // 声明了interval对象里的stop属性
+}
