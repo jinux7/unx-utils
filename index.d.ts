@@ -31,6 +31,7 @@ export function removeClassName(ele: Element, className: string): void;
 export function isParentNode(childNode: Element, parentNode: Element, flag?: boolean): boolean;
 // string
 export function price2chinese(price: number): string;
+export function stringLengthByType(str: string): number;
 // date
 export function date2string(...arg: any[]): string;
 export function getRangeDate(dateFlag: string): string[];

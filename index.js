@@ -43,6 +43,7 @@ let removeClassName = dom.removeClassName;
 let isParentNode = dom.isParentNode;
 // string
 let price2chinese = string.price2chinese;
+let stringLengthByType = string.stringLengthByType;
 // date
 let date2string = date.date2string;
 let getRangeDate = date.getRangeDate;
@@ -89,6 +90,7 @@ let utils = {
 	isParentNode,
 	// string
 	price2chinese,
+	stringLengthByType,
 	// date
 	date2string,
 	getRangeDate,

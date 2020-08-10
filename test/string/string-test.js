@@ -7,4 +7,9 @@ describe('#string.js', () => {
             assert.strictEqual(stringModule.price2chinese(66666.66), '陆万陆仟陆佰陆拾陆元陆角陆分');
         });
     });
+    describe('#stringLengthByType()', () => {
+        it('stringLengthByType() should return number', () => {
+            assert.strictEqual(stringModule.stringLengthByType('123abc人口手'), 15);
+        });
+    });
 });
