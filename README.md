@@ -50,6 +50,7 @@ javascript基础工具集合
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
 | price2chinese  | 将数字价格转换为大写中文 | price2chinese(66666.66) |
+| stringLengthByType  | 计算字符串长度，中文3，其它1 | stringLengthByType('abc123人口手') |
 ### date
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
