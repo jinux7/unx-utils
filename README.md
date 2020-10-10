@@ -7,6 +7,8 @@ javascript基础工具集合
 | arrayEqual  | 判断两个数组是否相等 | arrayEqual(arr1, arr2) |
 | arrayEach  | 遍历数组操作 | arrayEach(arr, function(item, index) { })|
 | arrFlat2complex  | 将一维数组转为二维数组 | arrFlat2complex([1,2,3,4], 2) |
+| array2tree  | 将一维数组转树结构 | array2tree(arr, 0) |
+| tree2array  | 将一维数组转树结构 | tree2array(tree) |
 ### object
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |

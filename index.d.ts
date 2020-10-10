@@ -2,6 +2,8 @@
 export function arrayEqual(arr1: any[], arr2: any[]): boolean;
 export function arrayEach(arr: any[], callback: (item: any, index: number) => void): void;
 export function arrFlat2complex(arr: any[], num: number): any[];
+export function array2tree(arr: any[], num: number): any[];
+export function tree2array(arr: any[]): any[];
 // object
 export function isPlainObject(obj: object): boolean;
 export function assign(flag: boolean, targetObj: object, obj1: object, ...objs: object[]): object;
