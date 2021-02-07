@@ -9,6 +9,7 @@ const string = require('./src/string/index.js')
 const date = require('./src/date/index.js')
 const random = require('./src/random/index.js')
 const fn = require('./src/function/index.js')
+const number = require('./src/number/index.js') 
 
 // array
 let arrayEqual = array.arrayEqual;
@@ -57,7 +58,8 @@ let throttle = fn.throttle;
 let curry = fn.curry;
 let compose = fn.compose;
 let interval = fn.interval;
-
+// number
+let bigNumAdd = number.bigNumAdd;
 let utils = {
 	// array
 	arrayEqual,
@@ -106,7 +108,9 @@ let utils = {
 	curry,
 	compose,
 	interval,
-	getTopLeftInBody
+	getTopLeftInBody,
+	// number
+	bigNumAdd
 };
 
 module.exports = utils;

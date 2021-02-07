@@ -63,10 +63,88 @@
 
     var arrFlat2complex_1 = arrFlat2complex;
 
+    /**
+     * @desc 数组转树,非递归求解,利用数组和对象相互引用  时间复杂度O(n)
+     * @param {Array} list 
+     * @param {Number} parId 
+     * @return {Array}
+     */
+    /**
+    * @desc 数组转树  递归求解
+    * @param {Array} list 
+    * @param {Number} parId 
+    * @return {Array}
+    */
+    // 方法二
+
+
+    function array2tree(list, parId) {
+      var len = list.length;
+
+      function loop(parId) {
+        var res = [];
+
+        for (var i = 0; i < len; i++) {
+          var item = list[i];
+
+          if (item.parentId === parId) {
+            item.children = loop(item.id);
+            res.push(item);
+          }
+        }
+
+        return res;
+      }
+
+      return loop(parId);
+    }
+
+    var array2tree_1 = array2tree;
+
+    /**
+     * @desc 树转数组扁平化结构, 深度优先遍历  递归
+     * @param {Array} data 
+     * @return {Array}
+     */
+    /**
+     * @desc 广度优先,队列  先进先出
+     * @param {Array} node 
+     * @return {Array}
+     */
+    // 方法二
+
+
+    function tree2array$1(node) {
+      var stack = node,
+          data = [];
+
+      while (stack.length != 0) {
+        var shift = stack.shift();
+        data.push({
+          id: shift.id,
+          name: shift.name,
+          parentId: shift.parentId
+        });
+        var children = shift.children;
+
+        if (children) {
+          for (var i = 0; i < children.length; i++) {
+            stack.push(children[i]);
+          }
+        }
+      }
+
+      return data;
+    }
+
+    var tree2array_1 = tree2array$1;
+
     var array = {
       arrayEqual: arrayEqual_1,
       arrayEach: arrayEach_1,
-      arrFlat2complex: arrFlat2complex_1
+      arrFlat2complex: arrFlat2complex_1,
+      array2tree: array2tree_1,
+      tree2array: tree2array_1
     };
 
     var class2type = {};
@@ -104,6 +182,8 @@
     var isPlainObject_1 = isPlainObject;
 
     function _typeof(obj) {
+      "@babel/helpers - typeof";
+
       if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function (obj) {
           return typeof obj;
@@ -999,8 +1079,30 @@
     }
     var price2chinese_1 = price2chinese;
 
+    /**
+     * @desc   计算字符串长度，中文是3，英文是1，目前只支持中文3个字符，其它语言都是按1个字符处理。
+     * @param  { String } str 
+     * @return { Number }
+     */
+    function stringLengthByType(str) {
+      var count = 0;
+
+      for (var i = 0, len = str.length; i < len; i++) {
+        if (/[\u4e00-\u9fa5]/.test(str[i])) {
+          count += 3;
+        } else {
+          count++;
+        }
+      }
+
+      return count;
+    }
+
+    var stringLengthByType_1 = stringLengthByType;
+
     var string = {
-      price2chinese: price2chinese_1
+      price2chinese: price2chinese_1,
+      stringLengthByType: stringLengthByType_1
     };
 
     var date2string = function date2string(argDate, argFormatStr, argShowTime) {
@@ -1381,7 +1483,8 @@
 
     var arrayEqual$1 = array.arrayEqual;
     var arrayEach$1 = array.arrayEach;
-    var arrFlat2complex$1 = array.arrFlat2complex; // object
+    var arrFlat2complex$1 = array.arrFlat2complex;
+    var array2tree$1 = array.array2tree; // object
 
     var isPlainObject$1 = object.isPlainObject;
     var assign$1 = object.assign;
@@ -1410,7 +1513,8 @@
     var removeClassName$1 = dom.removeClassName;
     var isParentNode$1 = dom.isParentNode; // string
 
-    var price2chinese$1 = string.price2chinese; // date
+    var price2chinese$1 = string.price2chinese;
+    var stringLengthByType$1 = string.stringLengthByType; // date
 
     var date2string$1 = date.date2string;
     var getRangeDate$1 = date.getRangeDate; // random
@@ -1428,6 +1532,8 @@
       arrayEqual: arrayEqual$1,
       arrayEach: arrayEach$1,
       arrFlat2complex: arrFlat2complex$1,
+      array2tree: array2tree$1,
+      tree2array: tree2array,
       // object
       isPlainObject: isPlainObject$1,
       assign: assign$1,
@@ -1456,6 +1562,7 @@
       isParentNode: isParentNode$1,
       // string
       price2chinese: price2chinese$1,
+      stringLengthByType: stringLengthByType$1,
       // date
       date2string: date2string$1,
       getRangeDate: getRangeDate$1,

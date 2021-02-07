@@ -17,3 +17,4 @@ require('./random/random-test.js');
 require('./function/function-test.js');
 require('./dom/dom-test.js');
 require('./bom/bom-test.js'); 
+require('./number/number-test'); 

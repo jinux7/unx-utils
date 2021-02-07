@@ -50,3 +50,5 @@ export function interval(): {
   (fn: ()=> void, timeOut: number): void; // 声明了interval函数本身
   stop(): void // 声明了interval对象里的stop属性
 }
+// number
+export function bigNumAdd(a: string, b: string): string;

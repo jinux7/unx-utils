@@ -8,7 +8,7 @@ javascript基础工具集合
 | arrayEach  | 遍历数组操作 | arrayEach(arr, function(item, index) { })|
 | arrFlat2complex  | 将一维数组转为二维数组 | arrFlat2complex([1,2,3,4], 2) |
 | array2tree  | 将一维数组转树结构 | array2tree(arr, 0) |
-| tree2array  | 将一维数组转树结构 | tree2array(tree) |
+| tree2array  | 将树转一维数组结构 | tree2array(tree) |
 ### object
 |  工具函数名   | 功能  | 用法 |
 |  ----  | ----  | ----  |
@@ -71,6 +71,10 @@ javascript基础工具集合
 | curry  | 包装成柯里化函数 | curry(fn)(arg1)(arg2)(arg3) |
 | compose  | 以柯里化函数为参数，从右向左管道式的执行 | compose(curryFn1,curryFn2,curryFn3)('fn3arg') |
 | interval  | 循环定时器，类似与原生setInterval | var demo = interval();<br/>demo(function() {console.log(555);}, 1000);<br/>demo.stop(); |
+### number
+|  工具函数名   | 功能  | 用法 |
+|  ----  | ----  | ----  |
+| bigNumAdd  | 两个大整数相加 | bigNumAdd('888888888888888888888888888888', '1') |
 ## 关于测试
 本项目的工具函数代码都会做单元测试，覆盖率争取达到95%以上。 
 
